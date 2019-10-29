@@ -26,6 +26,7 @@ export { default as cone } from './geometry/cone.mjs';
 export { default as plane } from './geometry/plane.mjs';
 export { default as icosphere } from './geometry/icosphere.mjs';
 export { default as sphere } from './geometry/sphere.mjs';
+export { default as cylinder } from './geometry/cylinder.mjs';
 
 // textures
 export { default as Texture } from './abstract/Texture.mjs';
