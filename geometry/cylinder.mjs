@@ -19,9 +19,7 @@ function create_smooth_geometry(turns, turns_chord) {
 	for (let i = 0; i <= turns; i += 1) {
 		const u = i / turns * turns_chord;
 
-		for (let j = 0; j <= 1; j += 1) {
-			const v = j / 1 * 1;
-
+		for (let v = 0; v <= 1; v += 1) {
 			const x = -Math.cos(u * PI2);
 			const y = Math.cos(v * PI);
 			const z = Math.sin(u * PI2);
@@ -38,26 +36,15 @@ function create_smooth_geometry(turns, turns_chord) {
 	let face_index = 0;
 
 	for (let i = 0; i < turns; i += 1) {
-		const offset = i * (1 + 1);
+		const offset = i * 2;
 
-		// north pole face
-		index[face_index++] = offset + 0;
-		index[face_index++] = offset + 1;
-		index[face_index++] = offset + 1 + 2;
+		index[face_index++] = offset + 0; // top
+		index[face_index++] = offset + 1; // bottom
+		index[face_index++] = offset + 3; // next bottom
 
-		for (let j = 1; j < 1; j += 1) {
-			index[face_index++] = offset + j;
-			index[face_index++] = offset + j + 1;
-			index[face_index++] = offset + j + 1 + 1;
-
-			index[face_index++] = offset + j + 1 + 1;
-			index[face_index++] = offset + j + 1;
-			index[face_index++] = offset + j + 1 + 2;
-		}
-
-		index[face_index++] = offset + 1 - 1;
-		index[face_index++] = offset + 1;
-		index[face_index++] = offset + 1 * 2;
+		index[face_index++] = offset + 0; // top
+		index[face_index++] = offset + 3; // next bottom
+		index[face_index++] = offset + 2; // next top
 	}
 
 	return new Geometry({
