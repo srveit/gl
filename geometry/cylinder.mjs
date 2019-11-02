@@ -4,12 +4,15 @@ import { memoize } from '../internal/utils.mjs';
 const PI = Math.PI;
 const PI2 = PI * 2;
 
+// TODO use angle for chord
+// TODO fix normals
 function create_smooth_geometry(turns, turns_chord) {
 	const num_vertices = (turns + 1) * (1 + 1);
 	const num_faces_per_turn = 2 * 1;
 	const num_faces = num_faces_per_turn * turns;
 
-	const position = new Float32Array(num_vertices * 3); // doubles as normal
+	const position = new Float32Array(num_vertices * 3);
+	const normal = new Float32Array(num_vertices * 3);
 	const uv = new Float32Array(num_vertices * 2);
 	const index = new Uint32Array(num_faces * 3);
 
@@ -24,8 +27,11 @@ function create_smooth_geometry(turns, turns_chord) {
 			const y = 0.5 - v;
 			const z = Math.sin(u * PI2);
 
+			normal[position_index] = x;
 			position[position_index++] = x;
+			normal[position_index] = 0;
 			position[position_index++] = y;
+			normal[position_index] = z;
 			position[position_index++] = z;
 
 			uv[uv_index++] = u;
@@ -53,7 +59,7 @@ function create_smooth_geometry(turns, turns_chord) {
 			size: 3
 		},
 		normal: {
-			data: position,
+			data: normal,
 			size: 3
 		},
 		uv: {

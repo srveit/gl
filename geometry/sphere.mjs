@@ -4,6 +4,7 @@ import { memoize } from '../internal/utils.mjs';
 const PI = Math.PI;
 const PI2 = PI * 2;
 
+// TODO use angles for chords
 function create_smooth_geometry(turns, bands, turns_chord, bands_chord) {
 	const num_vertices = (turns + 1) * (bands + 1);
 	const num_faces_per_turn = 2 * bands;
