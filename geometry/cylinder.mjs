@@ -21,7 +21,7 @@ function create_smooth_geometry(turns, turns_chord) {
 
 		for (let v = 0; v <= 1; v += 1) {
 			const x = -Math.cos(u * PI2);
-			const y = Math.cos(v * PI);
+			const y = 0.5 - v;
 			const z = Math.sin(u * PI2);
 
 			position[position_index++] = x;
